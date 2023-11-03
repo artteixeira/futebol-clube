@@ -17,7 +17,7 @@ export default class TeamService {
       };
     } catch (error) {
       return {
-        status: 'invalidData',
+        status: 'internalError',
         data: { message: `${error}` },
       };
     }
@@ -37,7 +37,7 @@ export default class TeamService {
       return { status: 'successful', data: team };
     } catch (error) {
       return {
-        status: 'invalidData',
+        status: 'internalError',
         data: { message: `${error}` },
       };
     }
