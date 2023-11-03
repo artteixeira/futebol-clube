@@ -39,6 +39,6 @@ export default {
     })
   },
   down(queryInterface: QueryInterface) {
-    return queryInterface.dropTable('matchess');
+    return queryInterface.dropTable('matches');
   }
 }

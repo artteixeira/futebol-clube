@@ -62,17 +62,18 @@ SequelizeMatch.init({
     type: DataTypes.BOOLEAN,
     allowNull: false,
     field: 'in_progress',
+    defaultValue: true,
   },
 }, {
   sequelize: db,
-  modelName: 'Matches',
+  modelName: 'matches',
   timestamps: false,
 });
 
-SequelizeMatch.belongsTo(SequelizeTeams, { foreignKey: 'home_team_id', as: 'home_team' });
-SequelizeMatch.belongsTo(SequelizeTeams, { foreignKey: 'away_team_id', as: 'away_team' });
+SequelizeMatch.belongsTo(SequelizeTeams, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+SequelizeMatch.belongsTo(SequelizeTeams, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 
-SequelizeTeams.hasMany(SequelizeTeams, { foreignKey: 'home_team_id', as: 'homeMatches' });
-SequelizeTeams.hasMany(SequelizeTeams, { foreignKey: 'away_team_id', as: 'awayMatches' });
+SequelizeTeams.hasMany(SequelizeMatch, { foreignKey: 'homeTeamId', as: 'homeMatches' });
+SequelizeTeams.hasMany(SequelizeMatch, { foreignKey: 'awayTeamId', as: 'awayMatches' });
 
 export default SequelizeMatch;
