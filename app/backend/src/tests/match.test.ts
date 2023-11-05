@@ -118,7 +118,7 @@ describe('Matches Test', () => {
 
       expect(status).to.equal(404);
       expect(body).to.deep.equal({
-        message: 'There is no team with such id',
+        message: 'There is no team with such id!',
       });
     });
   });
