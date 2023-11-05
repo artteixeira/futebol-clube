@@ -1,6 +1,7 @@
-import { ITeam } from '../Interfaces/Teams/ITeam';
+import { ITeam, boardType } from '../Interfaces/Teams/ITeam';
 import { ITeamModel } from '../Interfaces/Teams/ITeamModel';
 import SequelizeTeam from '../database/models/SequelizeTeam';
+import Filter from '../utils/Filters';
 
 export default class TeamModel implements ITeamModel {
   private model = SequelizeTeam;
@@ -17,5 +18,15 @@ export default class TeamModel implements ITeamModel {
     if (team === null) return null;
 
     return team;
+  }
+
+  async findAllLeaderboardFull(type: boardType): Promise<ITeam[]> {
+    const include = Filter.setBoardTypeIncludes(type);
+
+    const teams = await this.model.findAll({
+      include,
+    });
+
+    return teams;
   }
 }

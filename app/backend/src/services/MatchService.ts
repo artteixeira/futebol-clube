@@ -1,7 +1,7 @@
 import { ServiceResponse } from '../Interfaces/ServiceResponse';
 import { IMatches } from '../Interfaces/Matches/IMatches';
 import MatchModel from '../models/MatchModel';
-import filterMatches from '../utils/filterMatches';
+import Filter from '../utils/Filters';
 
 export default class MatchesService {
   constructor(
@@ -15,7 +15,7 @@ export default class MatchesService {
 
       return {
         status: 'successful',
-        data: filterMatches(Matches, inProgress),
+        data: Filter.filterInProgress(Matches, inProgress),
       };
     } catch (error) {
       return {

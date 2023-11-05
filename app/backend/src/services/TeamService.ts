@@ -1,6 +1,7 @@
 import { ServiceResponse } from '../Interfaces/ServiceResponse';
-import { ITeam } from '../Interfaces/Teams/ITeam';
+import { ITeam, ILeaderboardFull, ITeamFull, boardType } from '../Interfaces/Teams/ITeam';
 import TeamModel from '../models/TeamModel';
+import Filter from '../utils/Filters';
 
 export default class TeamService {
   constructor(
@@ -35,6 +36,22 @@ export default class TeamService {
       }
 
       return { status: 'successful', data: team };
+    } catch (error) {
+      return {
+        status: 'internalError',
+        data: { message: `${error}` },
+      };
+    }
+  }
+
+  public async getLeaderboardFull(path: string): Promise<ServiceResponse<ILeaderboardFull[]>> {
+    try {
+      const teams = await this.teamModel.findAllLeaderboardFull(path as boardType);
+
+      return {
+        status: 'successful',
+        data: Filter.leaderboardFullFormat(teams as unknown as ITeamFull[]),
+      };
     } catch (error) {
       return {
         status: 'internalError',

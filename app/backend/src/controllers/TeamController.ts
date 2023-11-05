@@ -21,4 +21,10 @@ export default class TeamController {
 
     return res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async getLeaderboardFull(req: Request, res: Response) {
+    const { status, data } = await this.teamService.getLeaderboardFull(req.path);
+
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }
